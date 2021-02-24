@@ -11,6 +11,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
         <Head>
+          <link rel="shortcut icon" href="favicon.png" type="image/png" />
           <title>Início | Move.it</title>
         </Head>
 

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/components/Countdown.module.css';
 
+let countdownTimout: NodeJS.Timeout;
+
 export function Countdown() {
     const [time, setTime] = useState(25 * 60); /*conversão de 25 min para segundos*/ 
-    const [active, setAcitve] = useState(false);
+    const [isActive, setIsAcitve] = useState(false);
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -13,16 +15,23 @@ export function Countdown() {
 
 
     function startCountdown() {
-        setAcitve(true);
+        setIsAcitve(true);
+    }
+
+    function resetCountdown() {
+        clearTimeout(countdownTimout);
+        /*Deve-se parar o timeout, pois mesmo após setar para false o isActive, ainda é 'executado' o countdown. Cancelando sua execução. */
+        setIsAcitve(false);
+        setTime(25 * 60);
     }
 
     useEffect(() => {
-        if (active && time > 0) {
-            setTimeout(() => {
+        if (isActive && time > 0) {
+            countdownTimout = setTimeout(() => {
                 setTime(time - 1)
             }, 1000)
         }
-    }, [active, time])
+    }, [isActive, time])
 
 
     return (
@@ -38,11 +47,19 @@ export function Countdown() {
                     <span>{secondRight}</span>
                 </div>
             </div>
-
-            <button type="button" className={styles.countdownButton}
-            onClick={startCountdown}>
-                Iniciar um ciclo
-            </button>
+            {isActive?
+                (<button type="button" 
+                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+                onClick={resetCountdown}>
+                    Abandonar ciclo                        
+                </button>)
+                :
+                (<button type="button" className={styles.countdownButton}
+                onClick={startCountdown}>
+                    Iniciar um ciclo
+                </button>)
+            }
+            
         </div>
     );
 }
