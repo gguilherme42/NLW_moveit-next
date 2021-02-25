@@ -6,7 +6,7 @@ import { ChallengesContext } from '../contexts/ChallengesContext';
 
 let countdownTimout: NodeJS.Timeout;
 
-export function Countdown() {
+export function Countdown(){
     const { startNewChallenge } = useContext(ChallengesContext);
 
 

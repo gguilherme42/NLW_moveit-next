@@ -1,35 +1,53 @@
 import { createContext, ReactNode, useState } from 'react';
 
+import challenges from '../../Challenges.json';
+
+interface IChallenge {
+    type: 'body' | 'eye';
+    description: string;
+    amount: number;
+};
 
 
-interface ChallengesContextData {
+interface IChallengesContextData {
     level: number;
     currentExperience: number;
     challengesCompleted: number; 
+    activeChallenge: IChallenge;
     levelUp: () => void;
     startNewChallenge: () => void;
-}
+    resetChallenge: () => void;
+};
 
-interface ChallengesProviderProps {
+interface IChallengesProviderProps {
     children: ReactNode;
-}
+};
 
-export const ChallengesContext = createContext({} as ChallengesContextData);
+export const ChallengesContext = createContext({} as IChallengesContextData);
 
 
 
-export function ChallengesProvider({ children }: ChallengesProviderProps) {
+export function ChallengesProvider({ children }: IChallengesProviderProps) {
 
     const [level, setLevel] = useState(1);
     const [currentExperience, setCurrentExperience] = useState(0);
     const [challengesCompleted, setChallengesCompleted] = useState(0);
+    const [activeChallenge, setActiveChallenge] = useState(null);
 
     function levelUp () {
         setLevel(level + 1);
     }
 
     function startNewChallenge() {
-        console.log('New challenge.')
+        const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
+        const challenge = challenges[randomChallengeIndex];
+        setActiveChallenge(challenge);
+
+    }
+
+
+    function resetChallenge() {
+        setActiveChallenge(null);
     }
 
     return (
@@ -37,8 +55,10 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
         value={{level, 
                 currentExperience, 
                 challengesCompleted, 
+                activeChallenge,
                 levelUp,
-                startNewChallenge}}>
+                startNewChallenge,
+                resetChallenge}}>
             {children}
         </ChallengesContext.Provider>
     );
