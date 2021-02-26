@@ -51,7 +51,23 @@ export function ChallengesProvider({ children }: IChallengesProviderProps) {
 
 
     function completedChallenge() {
+        if (!activeChallenge) {
+            return;
+        }
 
+        const { amount } = activeChallenge;
+
+        let finalExperience = currentExperience + amount;
+        if (finalExperience >= experienceToNextLevel) {
+            levelUp();
+            finalExperience = finalExperience - experienceToNextLevel;
+        } 
+        
+        setCurrentExperience(finalExperience)
+        setActiveChallenge(null);
+        setChallengesCompleted(challengesCompleted + 1)
+        
+        
     }
 
     function resetChallenge() {
