@@ -39,6 +39,7 @@ export function CountdownProvider({ children }: ICountdownProviderProps) {
         clearTimeout(countdownTimout);
         /*Deve-se parar o timeout, pois mesmo após setar para false o isActive, ainda é 'executado' o countdown. Cancelando sua execução. */
         setIsAcitve(false);
+        setHasFinished(false);
         setTime(0.05 * 60);
     }
 
