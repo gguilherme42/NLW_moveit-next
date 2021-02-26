@@ -51,6 +51,12 @@ export function ChallengesProvider({ children }: IChallengesProviderProps) {
         const challenge = challenges[randomChallengeIndex];
         setActiveChallenge(challenge);
 
+        if (Notification.permission === 'granted') {
+            new Notification('Novo desafio 👌', {
+                body: `Valendo ${challenge.amount}xp!`
+            });
+        }
+
     }
 
 
