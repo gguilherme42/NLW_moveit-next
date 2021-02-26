@@ -38,9 +38,9 @@ export const ChallengesContext = createContext({} as IChallengesContextData);
 export function ChallengesProvider({ children, 
     ...rest }: IChallengesProviderProps) {
 
-    const [level, setLevel] = useState(rest.level ?? 1); // Se o level não existir, então, 1.
+    const [level, setLevel] = useState(rest.level ?? 1); // Se o level não existir, então, 1. 
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0); 
-    const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
+    const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0); 
     const [activeChallenge, setActiveChallenge] = useState(null);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
