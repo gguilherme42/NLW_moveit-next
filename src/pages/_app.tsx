@@ -7,7 +7,9 @@ import { ChallengesProvider } from '../contexts/ChallengesContext';
 function MyApp({ Component, pageProps }) {
   
   return (
-  <ChallengesProvider children={<Component {...pageProps} />} />
+  <ChallengesProvider>
+      <Component {...pageProps} />
+  </ChallengesProvider>
      
     );
 }
