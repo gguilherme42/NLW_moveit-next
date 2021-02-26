@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 import challenges from '../../Challenges.json';
 
@@ -37,6 +37,10 @@ export function ChallengesProvider({ children }: IChallengesProviderProps) {
     const [activeChallenge, setActiveChallenge] = useState(null);
 
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
+
+    useEffect(() => {
+        Notification.requestPermission()
+    }, []);
 
     function levelUp () {
         setLevel(level + 1);
