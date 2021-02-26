@@ -7,38 +7,34 @@ import { CompletedChallenges } from '../components/CompletedChallenges';
 import { Countdown } from '../components/Countdown';
 import { ChallengeBox } from '../components/ChallengeBox';
 import { CountdownProvider } from '../contexts/CountdownContext';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import styles from '../styles/pages/Home.module.css';
 
 
 export default function Home(props) {
-  console.log(props);
   return (
-    <ChallengesProvider>
-      <div className={styles.container}>
-          <Head>
-            <link rel="shortcut icon" href="favicon.png" type="image/png" />
-            <title>Início | Move.it</title>
-          </Head>
+    <div className={styles.container}>
+        <Head>
+          <link rel="shortcut icon" href="favicon.png" type="image/png" />
+          <title>Início | Move.it</title>
+        </Head>
 
-          <ExperienceBar />
+        <ExperienceBar />
 
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile />
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
+        <CountdownProvider>
+          <section>
+            <div>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </div>
+            <div>
+              <ChallengeBox />
 
-              </div>
-            </section>
-          </CountdownProvider>
-      </div>
-    </ChallengesProvider>
+            </div>
+          </section>
+        </CountdownProvider>
+    </div>
   )
 }
 
